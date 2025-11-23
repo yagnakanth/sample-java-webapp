@@ -1,0 +1,20 @@
+name: Build Java WAR using Maven Docker
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: maven:3.9.9-eclipse-temurin-17
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build WAR
+        run: mvn clean package
+
+      - name: List target directory
+        run: ls -l target
